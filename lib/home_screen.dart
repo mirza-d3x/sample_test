@@ -22,13 +22,13 @@ class _ScreenHomeState extends State<ScreenHome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
+      body: SizedBox(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
         child: BlocBuilder<GetDataBloc, GetDataState>(
           builder: (context, state) {
             if (state is GetDataLoading) {
-              return Center(
+              return const Center(
                 child: CircularProgressIndicator(),
               );
             }
@@ -36,20 +36,20 @@ class _ScreenHomeState extends State<ScreenHome> {
               getData = BlocProvider.of<GetDataBloc>(context).getData;
               return Row(
                 children: [
-                  Container(
+                  SizedBox(
                     height: MediaQuery.of(context).size.height,
                     width: MediaQuery.of(context).size.width * .5,
-                    child: Center(
-                        child: Column(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(getData.results[0].name.first),
                         Text(getData.results[0].name.last),
                         Text(getData.results[0].gender),
                       ],
-                    )),
+                    ),
                   ),
-                  Container(
-                    color: Colors.blue,
+                  SizedBox(
                     height: MediaQuery.of(context).size.height,
                     width: MediaQuery.of(context).size.width * .5,
                   )
@@ -60,40 +60,27 @@ class _ScreenHomeState extends State<ScreenHome> {
               getData = BlocProvider.of<GetDataBloc>(context).getData;
               return Row(
                 children: [
-                  Container(
-                    color: Colors.red,
+                  SizedBox(
                     height: MediaQuery.of(context).size.height,
                     width: MediaQuery.of(context).size.width * .5,
                   ),
-                  Container(
+                  SizedBox(
                     height: MediaQuery.of(context).size.height,
                     width: MediaQuery.of(context).size.width * .5,
-                    child: Center(
-                        child: Column(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(getData.results[0].name.first),
                         Text(getData.results[0].name.last),
                         Text(getData.results[0].gender),
                       ],
-                    )),
+                    ),
                   ),
                 ],
               );
             }
-            return Row(
-              children: [
-                Container(
-                  color: Colors.red,
-                  height: MediaQuery.of(context).size.height,
-                  width: MediaQuery.of(context).size.width * .5,
-                ),
-                Container(
-                  color: Colors.blue,
-                  height: MediaQuery.of(context).size.height,
-                  width: MediaQuery.of(context).size.width * .5,
-                )
-              ],
-            );
+            return Container();
           },
         ),
       ),
@@ -101,7 +88,7 @@ class _ScreenHomeState extends State<ScreenHome> {
         onPressed: () {
           BlocProvider.of<GetDataBloc>(context).add(FetchData());
         },
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
     );
   }
